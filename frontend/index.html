@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Trial</title>
+    <!-- Import Axios in the HTML -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="responses">
+        <!-- This textarea is used to display the server responses -->
+        <textarea id="resDisplay" name="resDisplay" rows="4" cols="50"></textarea>
+    </div>
+    <!-- The below 2 buttons are used to test the GET and POST methods -->
+    <div id="methodTest">
+        <button id="testGET">Test GET</button>
+        <button id="testPOST">Test POST</button>
+    </div>
+    <!-- The below 2 buttons are used to CREATE and DROP the table -->
+    <div id="tableBtns">
+        <button id="createTable">Create Table</button>
+        <button id="dropTable">Drop Table</button>
+    </div>
+    <!-- This button is used to insert the message into the table in database -->
+    <div id="sendMsgBtn">
+        <input type="text" id="sendMsg" name="sendMsg">
+        <button id="insertMsg">Send Message</button>
+    </div>
+    <!-- This button is used to retrieve the message(s) from the table in database -->
+    <div id="getMsgBtn">
+        <button id="getMsgs">Retrieve Message</button>
+    </div>
+
+    <!-- Import script.js -->
+    <script src="script.js"></script>
+</body>
+</html>
