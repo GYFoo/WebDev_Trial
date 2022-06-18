@@ -8,7 +8,10 @@
         "airbnb-base"
     ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "rules": {
         "linebreak-style": 0,
