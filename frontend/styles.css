@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#reactTitle {
+    text-align: center;
+    padding: 15px;
+}
+
+#center {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+#responses {
+    height: 120px;
+    width: 700px;
+    padding: 5px;
+    overflow: auto;
+    border: 0.5px solid black;
+    border-radius: 8px;
+}
+
+#testBtn1, #testBtn2, #testBtn3,
+#testBtn4, #testBtn5, #testBtn6 {
+    background-color: #6A6A6A;
+    border: none;
+    padding: 8px;
+    border-radius: 7px;
+    color: white;
+}
