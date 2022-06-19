@@ -5,7 +5,7 @@
 // 4. created a test
 // 5. afterAll to close the database connection to end the process
 // 6. set the connection pool size when testing to 1 (database.js)
-
+// 7. git rm --cached .env (to remove from commit)
 const request = require('supertest');
 const app = require('../app');
 const dbConn = require('../database');
