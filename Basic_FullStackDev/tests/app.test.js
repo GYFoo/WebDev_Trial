@@ -10,6 +10,13 @@ const request = require('supertest');
 const app = require('../app');
 const dbConn = require('../database');
 
+beforeEach(() => {
+    return dbConn.query('BEGIN');
+});
+afterEach(() => {
+    return dbConn.query('ROLLBACK');
+});
+
 afterAll(() => {
     return dbConn.end();
 })
@@ -22,4 +29,23 @@ test('It should get the current time', () => {
         .then((response) => {
             return expect(response.body.now).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/)
         });
+});
+
+// test if user can be post to database
+test('It should create new user userTest with password a123', () => {
+    return request(app).post('/users').send({ username: 'userTest', password: 'a123' }).expect(201);
+});
+
+// test that there should not be any duplicated users with same password
+test('It should NOT create new user userTest1 with the same password', () => {
+    const appRequest = request(app);
+    const payload = { username: 'userTest', password: 'a123' };
+    return appRequest.post('/users').send(payload).expect(201).then(() => appRequest.post('/users').send(payload).expect(409));
+});
+
+// test that there should not be any duplicated users with different password
+test('It should NOT create new user userTest1 with the different password', () => {
+    const appRequest = request(app);
+    const diffPayLoad = { username: 'userTest', password: 'aaaaa' }
+    return appRequest.post('/users').send(diffPayLoad).expect(201).then(() => appRequest.post('/users').send(diffPayLoad).expect(409));
 });
