@@ -1,0 +1,15 @@
+{
+  "name": "basic_fullstackdev",
+  "version": "1.0.0",
+  "description": "backend for fullstack dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FGY",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3"
+  }
+}
