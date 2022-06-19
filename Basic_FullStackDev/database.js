@@ -7,7 +7,7 @@ const pool = new pg.Pool ({
     // url to the database
     connectionString: process.env.DATABASE_URL,
     // max no. of connections in this pool
-    max: 5,
+    max: process.env.POOL_SIZE,
     // secure socket layer
     ssl: {
         rejectUnauthorized: true,
