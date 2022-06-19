@@ -2,17 +2,27 @@
 require('dotenv').config();
 const pg = require('pg');
 
-// manages a pool of connection
-const pool = new pg.Pool ({
-    // url to the database
-    connectionString: process.env.DATABASE_URL,
-    // max no. of connections in this pool
-    max: process.env.NODE_ENV === 'test' ? process.env.TEST_POOL_SIZE : process.env.POOL_SIZE,
-    // secure socket layer
-    ssl: {
-        rejectUnauthorized: true,
-    },
-});
+if (process.env.NODE_ENV === 'test') {
+    const client = new pg.Client({
+        connectionString: process.env.DATABASE_URL,
+    });
+    client.connect();
+    module.exports = client;
+} 
+else {
+    // manages a pool of connection
+    const pool = new pg.Pool ({
+        // url to the database
+        connectionString: process.env.DATABASE_URL,
+        // max no. of connections in this pool
+        max: process.env.POOL_SIZE,
+        // secure socket layer
+        ssl: {
+            rejectUnauthorized: true,
+        },
+    });
+    module.exports = pool;
+}
 
 // for testing
 // pool.query('SELECT NOW()')
@@ -22,6 +32,3 @@ const pool = new pg.Pool ({
 //     .catch((error) => {
 //         console.log(error);
 //     });
-
-// export the pool
-module.exports = pool;
