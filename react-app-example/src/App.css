@@ -28,6 +28,56 @@
   color: #61dafb;
 }
 
+#Nav, #Footer
+{
+  display: flex;
+  background-color: palevioletred;
+}
+
+#Footer p
+{
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+}
+
+#Nav a
+{
+  display: block;
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#Nav a:link
+{
+  color: darkblue;
+}
+
+#Nav a:visited
+{
+  color: darkblue;
+}
+
+#Nav a:hover
+{
+  color: aliceblue;
+  background-color: rebeccapurple;
+}
+
+#Nav a:active
+{
+  background-color: orangered;
+}
+
+.Main
+{
+  min-height: calc(100vh - 122px - 100px);
+  padding: 50px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
