@@ -4,6 +4,8 @@ const cors = require('cors');
 // import pool from database.js
 const pool = require('./database');
 
+const Users = require('./model/users');
+
 // initialize
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -87,6 +89,55 @@ app.get('/api/message', async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
+});
+
+// setting up the users table in the database
+// query to create users table
+const CREATE_USERS_TABLE = `
+    CREATE TABLE users3  (
+        userid SERIAL NOT NULL PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        fullname VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        password VARCHAR(100) NOT NULL,
+        role VARCHAR(45) NOT NULL DEFAULT 'customer',
+        created_at TIMESTAMP without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );
+`;
+
+app.post('/users/table', async (req, res) => {
+    pool.query(CREATE_USERS_TABLE)
+    .then(() => {
+        res.send('Table created');
+    })
+    .catch((error) => {
+        res.send(error);
+    });
+});
+
+app.post('/users/', (req, res) => {
+    const { username } = req.body;
+    const { fullname } = req.body;
+    const { email } = req.body;
+    const { password } = req.body;
+
+    // supply the 5 parameters retrieved by the caller of the web service
+    Users.addUser(username, fullname, email, password, (err, result) => {
+        if (!err) {
+            // send the result back to the user
+            res.status(201).send({ 'User added with these data': result });
+        } else {
+            // if error code = 23505, send the error result
+            // eslint-disable-next-line no-lonely-if
+            if (err.code === '23505') {
+                res.status(422).send('{"Result":"username or email provided already exists"}');
+            } else {
+                console.log(err);
+                // else the error is unknown
+                res.status(500).send('{"Result":"Internal Server Error"}');
+            }
+        }
+    });
 });
 
 // make the app listen
