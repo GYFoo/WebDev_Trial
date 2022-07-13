@@ -8,7 +8,7 @@ const Users = require('./model/users');
 
 // initialize
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // setting up the app
 app.use(cors());
@@ -130,7 +130,7 @@ app.post('/users/', (req, res) => {
             // if error code = 23505, send the error result
             // eslint-disable-next-line no-lonely-if
             if (err.code === '23505') {
-                res.status(422).send('{"Result":"username or email provided already exists"}');
+                res.status(409).send('{"Result":"username or email provided already exists"}');
             } else {
                 console.log(err);
                 // else the error is unknown
