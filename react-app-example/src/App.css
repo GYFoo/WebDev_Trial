@@ -78,6 +78,24 @@
   padding: 50px;
 }
 
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+.successmsg {
+  background-color: #8FE381;
+  color: #008631;
+  font-weight: bold;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -15,22 +15,25 @@ import HomeScreen from './screens/HomeScreen';
 import ProductsScreen from './screens/ProductsScreen';
 import SignUp from './screens/SignUp';
 import LoginScreen from './screens/Login';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
     <div>
-      <NavBar />
+      <ChakraProvider>
+        <NavBar />
 
-      <BrowserRouter>
-        <Routes>
-          <Route exact path='/' element={<HomeScreen/>}/>
-          <Route path="/products" element={<ProductsScreen/>}/>
-          <Route path="/sign-up" element={<SignUp/>}/>
-          <Route path='/login' element={<LoginScreen/>}/>
-          <Route path='*' element={<NoScreen/>}/>
-        </Routes>
-      </BrowserRouter>
-      <FooterBar />
+        <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element={<HomeScreen/>}/>
+            <Route path="/products" element={<ProductsScreen/>}/>
+            <Route path="/sign-up" element={<SignUp/>}/>
+            <Route path='/login' element={<LoginScreen/>}/>
+            <Route path='*' element={<NoScreen/>}/>
+          </Routes>
+        </BrowserRouter>
+        <FooterBar />
+      </ChakraProvider>
     </div>
   )
 }
