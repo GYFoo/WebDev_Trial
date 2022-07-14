@@ -80,12 +80,12 @@ function SignUp() {
         >
             {props => (
                 <Flex bg="gray.50" align="center" justify="center" h="100vh">
-                    <Box bg="white" w='60%' p={20} rounded="lg" shadow='md'>
+                    <Box bg="white" w='60%' p={19} rounded="lg" shadow='md'>
                         <Form>
-                            <Heading pb='40px'>Sign Up</Heading>
+                            <Heading pl={7} pt={2}>Sign Up</Heading>
                             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                             <p ref={successRef} className={successMsg ? "successmsg" : "offscreen"}>{successMsg}</p>
-                            <VStack align="stretch">
+                            <VStack align="stretch" p={7}>
                                 <CustomTextInput 
                                     label="Username" 
                                     name="username" 
@@ -117,7 +117,7 @@ function SignUp() {
                                     placeholder="Confirm Password"
                                 />
                             </VStack>
-                            <HStack spacing='20px' pt='30px'>
+                            <HStack spacing='20px' pt='10px' pb={2} pl={7}>
                                 <Button type='submit'>{props.isSubmitting ? 'Loading...' : 'Submit'}</Button>
                                 <Button type='reset'>Reset</Button>
                             </HStack>
