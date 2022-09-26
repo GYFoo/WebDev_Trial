@@ -46,6 +46,44 @@ test('It should NOT create new user userTest1 with the same password', () => {
 // test that there should not be any duplicated users with different password
 test('It should NOT create new user userTest1 with the different password', () => {
     const appRequest = request(app);
-    const diffPayLoad = { username: 'userTest', password: 'aaaaa' }
+    const diffPayLoad = { username: 'userTest', password: 'aaaaa' };
     return appRequest.post('/users').send(diffPayLoad).expect(201).then(() => appRequest.post('/users').send(diffPayLoad).expect(409));
+});
+
+// test that jwt is given
+test('It should give me a jwt', () => {
+    const appRequest = request(app);
+    const payload = { username: 'userTest', password: 'a123' };
+    return appRequest
+        .post('/users')
+        .send(payload)
+        .expect(201)
+        .then(() => appRequest.post('/sessions').send(payload).expect(201))
+        .then((response) => expect(response.body.token).toEqual(expect.anything()));
+});
+
+// test that jwt should not be given when the wrong password is given
+test('It should give me a jwt when wrong password is given', () => {
+    const appRequest = request(app);
+    const payload = { username: 'userTest', password: 'a123' };
+    const diffPayLoad = { username: 'userTest', password: 'aaaaa' };
+    return appRequest
+        .post('/users')
+        .send(payload)
+        .expect(201)
+        .then(() => appRequest.post('/sessions').send(diffPayLoad).expect(401))
+        .then((response) => expect(response.body.error).toMatch(/Wrong Password/));
+});
+
+// test that jwt should not be given when user does not exist
+test('It should give me a jwt when user does not exist', () => {
+    const appRequest = request(app);
+    const payload = { username: 'userTest', password: 'a123' };
+    const diffPayLoad = { username: 'user', password: 'aaaaa' };
+    return appRequest
+        .post('/users')
+        .send(payload)
+        .expect(201)
+        .then(() => appRequest.post('/sessions').send(diffPayLoad).expect(404))
+        .then((response) => expect(response.body.error).toMatch(/not found!/));
 });
