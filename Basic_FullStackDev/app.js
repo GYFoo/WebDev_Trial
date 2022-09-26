@@ -1,8 +1,9 @@
 const express = require('express');
-const { UserExistsError } = require('./managers/error');
+const { UserExistsError, PasswordMismatchError, NoSuchUserError } = require('./managers/error');
 const app = express();
 const { now } = require('./managers/time');
 const userManager = require('./managers/users');
+const jwtManager = require('./managers/jwt');
 const createHttpError = require('http-errors');
 const bp = require('body-parser');
 app.use(bp.json());
@@ -36,6 +37,27 @@ app.post('/users', (req, res, next) => {
                 return next(createHttpError(409, error.message));
             }
             else {
+                return next(error);
+            }
+        });
+});
+
+app.post('/sessions', (req, res, next) => {
+    const { username, password } = req.body;
+    return userManager
+        .compare(username, password)
+        .then(() => {
+            return jwtManager.create(username);
+        })
+        .then((token) => {
+            return res.status(201).json({ token });
+        })
+        .catch((error) => {
+            if (error instanceof PasswordMismatchError) {
+                return next(createHttpError(401, error.message));
+            } else if (error instanceof NoSuchUserError) {
+                return next(createHttpError(404, error.message));
+            } else {
                 return next(error);
             }
         });
