@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Client</title>
+        <link href="styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Register -->
+            <div class="register">
+                <h1>Register</h1>
+                <h3>Create a new Account</h3>
+                <form autocomplete="off" id="register-form">
+                    <!-- input field for username -->
+                    <div>
+                        <label for="username-register">Username</label>
+                        <input id="username-register" type="text" required />
+                    </div>
+                    <!-- input field for password -->
+                    <div>
+                        <label for="password-register">Password</label>
+                        <input id="password-register" type="password" required />
+                    </div>
+                    <!-- input field for confirm password -->
+                    <div>
+                        <label for="confirm-register">Confirm</label>
+                        <input id="confirm-register" type="password" required />
+                    </div>
+                    <!-- Submit Button -->
+                    <div><button type="submit">Register</button></div>
+                </form>
+            </div>
+            <!-- Login -->
+            <div class="login">
+                <h1>Login</h1>
+                <h3>Welcome Back!</h3>
+                <form autocomplete="off" id="login-form">
+                    <!-- input field for username -->
+                    <div>
+                        <label for="username-login">Username</label>
+                        <input id="username-login" type="text" required />
+                    </div>
+                    <!-- input field for password -->
+                    <div>
+                        <label for="password-login">Password</label>
+                        <input id="password-login" type="password" required />
+                    </div>
+                    <!-- Submit Button -->
+                    <div><button type="submit">Login</button></div>
+                </form>
+            </div>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
