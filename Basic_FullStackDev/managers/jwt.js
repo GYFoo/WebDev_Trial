@@ -5,5 +5,5 @@ const signAsync = util.promisify(jwt.sign);
 const privateKey = process.env.JWT_PRIVATE_KEY;
 
 module.exports.create = (username) => {
-    return signAsync({ username }, privateKey);
+    return signAsync({ username }, privateKey, { expiresIn: 10 });
 }
