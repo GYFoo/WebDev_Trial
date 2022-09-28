@@ -1,6 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 const { UserExistsError, PasswordMismatchError, NoSuchUserError } = require('./managers/error');
 const app = express();
+app.use(cors());
 const { now } = require('./managers/time');
 const userManager = require('./managers/users');
 const jwtManager = require('./managers/jwt');
