@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+}
+
+.container div {
+    flex: 1;
+    text-align: center;
+}
+
+.register form > div, .login form > div {
+    margin: 10px;
+}
